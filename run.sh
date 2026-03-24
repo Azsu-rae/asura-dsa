@@ -1,6 +1,3 @@
 #! /bin/bash
 
-gcc main.c sorts.c utils.c
-./a.out
-
-rm a.out
+gcc main.c Data.c LinkedList.c && ./a.out

@@ -1,8 +1,6 @@
 #ifndef SORTS_H
 #define SORTS_H
 
-#include <stdbool.h>
-
 // sorting algorithms
 void selection_sort(int* T, int n);
 void insertion_sort(int* T, int n);

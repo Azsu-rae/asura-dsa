@@ -1,40 +1,28 @@
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
-#include "sorts.h"
-#include "utils.h"
+#include "Data.h"
+#include "LinkedList.h"
 
-#define debug false
+void LinkedListTest() {
+    int n;
+    scanf("%d", &n);
 
-void placeholder() {
-    int *T, n;
-    if (debug) {
-        T = (int[]){2, 5, 2, 9, 0, 8, 5, 1, 9};
-        n = 9;
-    } else {
-        n = 100000;
-        gen_random_array(&T, n, n);
+    Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int tmp;
+        scanf("%d", &tmp);
+        insert_end(&head, data(tmp));
     }
-    //    display("Original Array: ", T, n);
 
-    clock_t start, end;
-    double cpu_time_used;
-    start = clock();
-    quick_sort(T, n);
-    end = clock();
-    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("time: %f seconds\n", cpu_time_used);
-    //    display("Sorted Array: ", T, n);
+    char* buff = linkedList_to_str(head);
+    printf("%s\n", buff);
 
-    if (!debug) {
-        free(T);
-    }
-    printf("\n");
+    linkedList_free(&head);
+    free(buff);
 }
 
 int main() {
-    benchmark();
+    LinkedListTest();
     return 0;
 }
