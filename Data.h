@@ -7,8 +7,8 @@ typedef struct {
     int x;
 } Data;
 
-Data data(int x);
+Data Data_create(int x);
 
-char* data_to_str(Data data);
+char* Data_to_str(Data data);
 
 #endif
