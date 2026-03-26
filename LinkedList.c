@@ -15,11 +15,13 @@ Node* Node_create(Data data) {
 }
 
 void LinkedList_free(Node** head) {
-    if (*head) {
-        LinkedList_free(&((*head)->next));
+    Node* curr = *head;
+    while (curr) {
+        Node* next = curr->next;
+        free(curr);
+        curr = next;
     }
 
-    free(*head);
     *head = NULL;
 }
 
@@ -33,6 +35,12 @@ void insert_end(Node** head, Data data) {
         }
         curr->next = Node_create(data);
     }
+}
+
+void insert_start(Node** head, Data data) {
+    Node* old_head = *head;
+    *head = Node_create(data);
+    (*head)->next = old_head;
 }
 
 int LinkedList_len(Node* head) {

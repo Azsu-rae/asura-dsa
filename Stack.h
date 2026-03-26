@@ -9,9 +9,7 @@ typedef struct {
     Node* top;
 } Stack;
 
-void push(Stack stack, Data data) {
-    if (!stack.top) {
-    }
-}
+void push(Stack stack, Data data);
+Data pop(Stack stack);
 
 #endif

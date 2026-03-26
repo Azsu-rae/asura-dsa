@@ -12,7 +12,7 @@ int main() {
     for (int i = 0; i < n; i++) {
         int tmp;
         scanf("%d", &tmp);
-        insert_end(&head, Data_create(tmp));
+        insert_start(&head, Data_create(tmp));
     }
 
     char* buff = LinkedList_to_str(head);
