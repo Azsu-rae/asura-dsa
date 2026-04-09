@@ -1,14 +1,14 @@
 #ifndef DATA_H
 #define DATA_H
 
-#define DATA_STR_LEN 20
+#include "Type.h"
 
-typedef struct {
-    int x;
+typedef struct Data {
+    void* x;
+    Type type;
+    int STR_LEN;
+    char* (*str)(struct Data);
+    struct Data (*create)(void*, Type);
 } Data;
-
-Data Data_create(int x);
-
-char* Data_to_str(Data data);
 
 #endif

@@ -48,6 +48,7 @@ double avg(int size, void (*sort)(int*, int), int** arr) {
 void benchmark() {
     void (*sort_algo[])(int*, int) = {selection_sort, bubble_sort,
                                       insertion_sort, merge_sort, quick_sort};
+
     double cpu_time[5][4];
     int* arr[4] = {};
     for (int s = 0; s < 5; s++) {
