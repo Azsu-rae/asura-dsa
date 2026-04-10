@@ -9,6 +9,8 @@ typedef struct {
     Node* top;
 } Stack;
 
+Stack Stack_create();
+
 void push(Stack stack, Data data);
 Data pop(Stack stack);
 

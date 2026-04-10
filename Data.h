@@ -1,14 +1,20 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include "Type.h"
+typedef struct Data Data;
+
+typedef struct DataVTable {
+    int STR_LEN;
+    char* (*str)(Data);
+    Data (*create)(void*);
+} DataVTable;
 
 typedef struct Data {
-    void* x;
-    Type type;
-    int STR_LEN;
-    char* (*str)(struct Data);
-    struct Data (*create)(void*, Type);
+    void* value;
+    const DataVTable* vt;
 } Data;
+
+Data int_create(void* int_val);
+char* int_str(Data int_data);
 
 #endif

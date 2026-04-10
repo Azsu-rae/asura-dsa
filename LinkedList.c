@@ -53,10 +53,14 @@ int LinkedList_len(Node* head) {
 }
 
 char* LinkedList_to_str(Node* head) {
-    int str_len = LinkedList_len(head) * (4 + DATA_STR_LEN);
+    if (!head) {
+        return "NULL";
+    }
+
+    int str_len = LinkedList_len(head) * (4 + head->data.vt->STR_LEN);
     char* to_str = malloc(str_len);
     while (head) {
-        snprintf(to_str + strlen(to_str), str_len - strlen(to_str), "%s -> ", Data_to_str(head->data));
+        snprintf(to_str + strlen(to_str), str_len - strlen(to_str), "%s -> ", head->data.vt->str(head->data));
         head = head->next;
     }
     snprintf(to_str + strlen(to_str), str_len - strlen(to_str), "NULL");

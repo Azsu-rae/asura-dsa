@@ -1,3 +1,3 @@
 #! /bin/bash
 
-gcc main.c Data.c LinkedList.c && ./a.out
+gcc -g main.c Data.c LinkedList.c -o dsa
