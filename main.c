@@ -12,8 +12,6 @@ int main() {
         insert_end(&head, int_create(T + i));
     }
 
-    //    printf("%s ", head->data.vt->str(head->next->data));
-
     char* buff = LinkedList_to_str(head);
     printf("%s\n", buff);
     free(buff);
