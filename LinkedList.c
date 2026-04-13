@@ -1,6 +1,7 @@
 
 #include "LinkedList.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -60,10 +61,32 @@ char* LinkedList_to_str(Node* head) {
     int str_len = LinkedList_len(head) * (4 + head->data.vt->STR_LEN);
     char* to_str = malloc(str_len);
     while (head) {
-        snprintf(to_str + strlen(to_str), str_len - strlen(to_str), "%s -> ", head->data.vt->str(head->data));
+        snprintf(to_str + strlen(to_str), str_len - strlen(to_str), "%s -> ", Data_str(head->data));
         head = head->next;
     }
     snprintf(to_str + strlen(to_str), str_len - strlen(to_str), "NULL");
 
     return to_str;
+}
+
+bool LinkedList_remove(Node** head, int index) {
+    int i = 0;
+    Node *curr = *head, *prev = *head;
+    while (i < index && curr) {
+        i++;
+        prev = curr;
+        curr = curr->next;
+    }
+
+    if (index == 0 && curr) {
+        free(*head);
+        *head = curr->next;
+        return true;
+    } else if (curr) {
+        prev->next = curr->next;
+        free(curr);
+        return true;
+    } else {
+        return false;
+    }
 }

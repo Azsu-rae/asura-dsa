@@ -11,7 +11,10 @@ typedef struct {
 
 Stack Stack_create();
 
-void push(Stack stack, Data data);
-Data pop(Stack stack);
+bool is_empty(Stack stack);
+void push(Stack* stack, Data data);
+Data pop(Stack* stack);
+
+void Stack_free(Stack* stack);
 
 #endif

@@ -14,6 +14,8 @@ typedef struct Data {
     const DataVTable* vt;
 } Data;
 
+static inline char* Data_str(Data data) { return data.vt->str(data); }
+
 Data int_create(void* int_val);
 char* int_str(Data int_data);
 
