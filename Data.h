@@ -2,6 +2,7 @@
 #define DATA_H
 
 #include <stddef.h>
+
 typedef struct Data Data;
 
 typedef struct DataVTable {

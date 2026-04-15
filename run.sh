@@ -1,4 +1,4 @@
 #! /bin/bash
 
-gcc -g main.c LinkedList.c utils.c -o dsa
+gcc -g main.c Simplex.c arrays.c -o dsa
 ./dsa

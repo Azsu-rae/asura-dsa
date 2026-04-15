@@ -6,11 +6,19 @@
 #include "Data.h"
 #include "Stack.h"
 
+// clang-format off
 bool is_operator(char curr) {
-    return curr == 'A' || curr == 'O' || curr == '~' || curr == '-' || curr == '<' || curr == 'X' || curr == '(' ||
-           curr == ')';
+    return curr == 'A'
+        || curr == 'O'
+        || curr == '~'
+        || curr == '-'
+        || curr == '<'
+        || curr == 'X'
+        || curr == '('
+        || curr == ')';
 }
 
+// clang-format on
 bool is_lowercase(int curr) { return curr >= 97 && curr <= 122; }  // a = 97 z = 122
 
 void logic() {

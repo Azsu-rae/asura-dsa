@@ -85,6 +85,21 @@ void _split(int* T, int n, int** T1, int n1, int** T2, int n2) {
     }
 }
 
+void _merge(int* T, int* T1, int n1, int* T2, int n2) {
+    int i = 0, j = 0, k = 0;
+    while (i < n1 && j < n2) {
+        T[k++] = T1[i] < T2[j] ? T1[i++] : T2[j++];
+    }
+
+    while (i < n1) {
+        T[k++] = T1[i++];
+    }
+
+    while (j < n2) {
+        T[k++] = T2[j++];
+    }
+}
+
 void merge_sort(int* T, int n) {
     if (n <= 1) {
         return;
@@ -99,21 +114,6 @@ void merge_sort(int* T, int n) {
     _merge(T, T1, n1, T2, n2);
     free(T1);
     free(T2);
-}
-
-void _merge(int* T, int* T1, int n1, int* T2, int n2) {
-    int i = 0, j = 0, k = 0;
-    while (i < n1 && j < n2) {
-        T[k++] = T1[i] < T2[j] ? T1[i++] : T2[j++];
-    }
-
-    while (i < n1) {
-        T[k++] = T1[i++];
-    }
-
-    while (j < n2) {
-        T[k++] = T2[j++];
-    }
 }
 
 int _partition(int* T, int n) {

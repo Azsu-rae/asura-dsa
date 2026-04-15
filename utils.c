@@ -5,9 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "Data.h"
-#include "LinkedList.h"
-#include "Stack.h"
+#include "arrays.h"
 
 void gen_random_array(int** T, int size, int max_val) {
     srand(time(NULL));
@@ -17,7 +15,7 @@ void gen_random_array(int** T, int size, int max_val) {
     }
 }
 
-double avg(int size, void (*sort)(int*, int), int** arr) {
+double _avg(int size, void (*sort)(int*, int), int** arr) {
     double total = 0;
     for (int i = 0; i < 30; i++) {
         double cpu_time_used;
@@ -43,7 +41,7 @@ void benchmark() {
             if (!arr[index]) {
                 gen_random_array(&arr[index], size, size * 10);
             }
-            cpu_time[s][index] = avg(size, sort_algo[s], arr);
+            cpu_time[s][index] = _avg(size, sort_algo[s], arr);
         }
     }
 
@@ -62,17 +60,4 @@ void benchmark() {
     printf("quick_sort              %f    %f     %f    %f\n", cpu_time[4][0], cpu_time[4][1], cpu_time[4][2],
            cpu_time[4][3]);
     return;
-}
-
-void Stack_test(int T[], int n) {
-    Stack stack = (Stack){.top = NULL};
-    for (int i = 0; i < n; i++) {
-        push(&stack, int_create(T + i));
-    }
-
-    while (!is_empty(stack)) {
-        printf("%s\n", Data_str(pop(&stack)));
-    }
-
-    Stack_free(&stack);
 }

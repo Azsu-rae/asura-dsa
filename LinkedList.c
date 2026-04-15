@@ -58,13 +58,13 @@ char* LinkedList_to_str(Node* head) {
         return "NULL";
     }
 
-    int str_len = LinkedList_len(head) * (4 + Data_STR_LEN(head->data));
-    char* buf = malloc(str_len);
+    int len = LinkedList_len(head) * (4 + Data_STR_LEN(head->data));
+    char* buf = calloc(len, sizeof(char));
     while (head) {
-        snprintf(buf + strlen(buf), str_len - strlen(buf), "%s -> ", Data_str(head->data));
+        snprintf(buf + strlen(buf), len - strlen(buf), "%s -> ", Data_str(head->data));
         head = head->next;
     }
-    snprintf(buf + strlen(buf), str_len - strlen(buf), "NULL");
+    snprintf(buf + strlen(buf), len - strlen(buf), "NULL");
 
     return buf;
 }

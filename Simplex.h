@@ -20,6 +20,7 @@ LP LP_allocate(int n, int m);
 void LP_free(LP lp);
 
 LP LP_structured_input();
+char* LP_to_str(LP lp);
 
 void simplex();
 

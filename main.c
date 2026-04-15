@@ -1,12 +1,12 @@
-#include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 
-#include "utils.h"
+#include "Simplex.h"
 
 int main() {
-    int *T, n;
-    input(&T, &n);
-    linked_list(T, n);
-    free(T);
+    LP lp = LP_structured_input();
+    char* buf = LP_to_str(lp);
+    printf("%s\n", buf);
+    free(buf);
     return 0;
 }

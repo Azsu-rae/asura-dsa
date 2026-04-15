@@ -4,8 +4,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-#include "utils.h"
+#include "arrays.h"
 
 // clang-format off
 LP LP_allocate(int n, int m) {
@@ -44,11 +45,11 @@ LP LP_structured_input() {
             float tmp;
             scanf("%f", &tmp);
             if (i == 0 && j == 0) {
-                lp.maximization = (bool)tmp;
+                lp.maximization = (tmp == 1.0);
             } else if (i == 0) {
                 lp.c[j - 1] = tmp;
             } else if (j == n) {
-                lp.canonical[i - 1] = (bool)tmp;
+                lp.canonical[i - 1] = (tmp == 1.0);
             } else if (j == n + 1) {
                 lp.b[i - 1] = tmp;
             } else {
@@ -60,31 +61,27 @@ LP LP_structured_input() {
     return lp;
 }
 
+// clang-format off
 char* LP_to_str(LP lp) {
-    char* buf = malloc(sizeof(char) * (lp.m + 1) * lp.n * 30);
-    for (int i = 0; i < m + 1; i++) {
-        bool first = true;
-        for (int j = 0; j < n + 2; j++) {
-            float curr = constraints[i][j];
-            if (i == 0 && j == 0) {
-                printf("\n%s =", curr == 0 ? "Min(Z)" : "Max(Z)");
-                continue;
-            }
-            if (i == 0) {
-                if (j == n + 1) {
-                    continue;
-                }
-                printf("%s %.2fx_%d", curr < 0 ? " -" : first ? "" : " +", fabsf(curr), j);
-            } else if (j < n) {
-                printf("%s %.2fx_%d", curr < 0 ? " -" : first ? "" : " +", fabsf(curr), j + 1);
-            } else if (j == n) {
-                printf(" %c= ", curr == 0 ? '<' : '>');
+    size_t len = (lp.m + 1) * lp.n * 30;
+    char* buf = calloc(len, sizeof(char));
+    for (size_t j = 0; j < lp.m + 1; j++) {
+        if (j == 0) {
+            snprintf(buf, len, "%s =", lp.maximization ? "Max(Z)" : "Min(Z)");
+        } for (size_t i = 0, first = 1; i < lp.n; i++, first = 0) {
+            char* operator;
+            float coef;
+            if (first) {
+                operator = "";
+                coef = lp.c[i];
             } else {
-                printf("%.2f", curr);
-            }
-            first = false;
-        }
-        printf("\n");
+                operator = lp.c[i] < 0 ? " -" : " +";
+                coef = fabsf(lp.c[i]);
+            } snprintf(buf + strlen(buf), len + strlen(buf), "%s %.2fx_%zu", operator, coef, i+1);
+        } if (j > 0) {
+            snprintf(buf + strlen(buf), len + strlen(buf), " %s %.2f", lp.canonical[j-1] ? "<=" : ">=", lp.b[j-1]);
+        } snprintf(buf + strlen(buf), len + strlen(buf), "\n");
     }
-    printf("\n");
+
+    return buf;
 }
