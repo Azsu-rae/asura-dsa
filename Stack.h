@@ -17,4 +17,6 @@ Data pop(Stack* stack);
 
 void Stack_free(Stack* stack);
 
+void Stack_test(int T[], int n);
+
 #endif

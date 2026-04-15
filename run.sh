@@ -1,4 +1,4 @@
 #! /bin/bash
 
-gcc -g main.c Data.c LinkedList.c Stack.c -o dsa
+gcc -g main.c LinkedList.c utils.c -o dsa
 ./dsa

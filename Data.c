@@ -12,3 +12,8 @@ char* int_str(Data int_data) {
     snprintf(to_str, int_data.vt->STR_LEN, "%d", *((int*)int_data.value));
     return to_str;
 }
+
+const DataVTable CHAR_VT = {.STR_LEN = 1, .create = char_create, .str = char_str};
+
+Data char_create(void* char_val) { return (Data){.value = char_val, .vt = &CHAR_VT}; }
+char* char_str(Data char_data) { return (char*)char_data.value; }

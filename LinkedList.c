@@ -8,7 +8,7 @@
 
 #include "Data.h"
 
-Node* Node_create(Data data) {
+Node* _node_create(Data data) {
     Node* node = malloc(sizeof(Node));
     node->next = NULL;
     node->data = data;
@@ -28,19 +28,19 @@ void LinkedList_free(Node** head) {
 
 void insert_end(Node** head, Data data) {
     if (!*head) {
-        *head = Node_create(data);
+        *head = _node_create(data);
     } else {
         Node* curr = *head;
         while (curr->next) {
             curr = curr->next;
         }
-        curr->next = Node_create(data);
+        curr->next = _node_create(data);
     }
 }
 
 void insert_start(Node** head, Data data) {
     Node* old_head = *head;
-    *head = Node_create(data);
+    *head = _node_create(data);
     (*head)->next = old_head;
 }
 
@@ -58,15 +58,15 @@ char* LinkedList_to_str(Node* head) {
         return "NULL";
     }
 
-    int str_len = LinkedList_len(head) * (4 + head->data.vt->STR_LEN);
-    char* to_str = malloc(str_len);
+    int str_len = LinkedList_len(head) * (4 + Data_STR_LEN(head->data));
+    char* buf = malloc(str_len);
     while (head) {
-        snprintf(to_str + strlen(to_str), str_len - strlen(to_str), "%s -> ", Data_str(head->data));
+        snprintf(buf + strlen(buf), str_len - strlen(buf), "%s -> ", Data_str(head->data));
         head = head->next;
     }
-    snprintf(to_str + strlen(to_str), str_len - strlen(to_str), "NULL");
+    snprintf(buf + strlen(buf), str_len - strlen(buf), "NULL");
 
-    return to_str;
+    return buf;
 }
 
 bool LinkedList_remove(Node** head, int index) {
@@ -89,4 +89,17 @@ bool LinkedList_remove(Node** head, int index) {
     } else {
         return false;
     }
+}
+
+void LinkedList_test(int T[], int n) {
+    Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        insert_end(&head, int_create(T + i));
+    }
+
+    char* buf = LinkedList_to_str(head);
+    printf("%s\n", buf);
+    free(buf);
+
+    LinkedList_free(&head);
 }

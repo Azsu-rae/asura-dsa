@@ -1,11 +1,13 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <stddef.h>
+
 // utilities
 void gen_random_array(int** T, int size, int max_val);
-void display(char* label, int* T, int n);
-void input(int** T, int* n);
-
 void benchmark();
+
+void linked_list(int T[], int n);
+void Stack_test(int T[], int n);
 
 #endif
