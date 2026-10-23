@@ -2,6 +2,19 @@
 #define DATA_H
 
 #include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <inttypes.h>
+
+typedef enum {
+    SIZE_T,
+    UBYTE,
+    INT,
+} DType;
+
+void* DType_index(void* data, DType type, size_t i);
+void DType_print(void* data, DType type);
+size_t DType_sizeof(DType type);
 
 typedef struct Data Data;
 
@@ -11,10 +24,10 @@ typedef struct DataVTable {
     Data (*create)(void*);
 } DataVTable;
 
-typedef struct Data {
+struct Data {
     void* value;
     const DataVTable* vt;
-} Data;
+};
 
 static inline char* Data_str(Data data) { return data.vt->str(data); }
 static inline size_t Data_STR_LEN(Data data) { return data.vt->STR_LEN; }

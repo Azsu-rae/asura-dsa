@@ -5,6 +5,42 @@
 
 const DataVTable INT_VT = {.STR_LEN = 20, .create = int_create, .str = int_str};
 
+
+void* DType_index(void* data, DType type, size_t i) {
+    switch(type) {
+        case (SIZE_T):
+            return ((size_t*) data) + i;
+        case (INT):
+            return ((int*) data) + i;
+        case (UBYTE):
+            return ((uint8_t*) data) + i;
+    }
+}
+
+
+void DType_print(void* data, DType type) {
+    switch(type) {
+        case (SIZE_T):
+            printf("%lu", *((size_t*)data));
+        case (INT):
+            printf("%d", *((int*)data));
+        case (UBYTE):
+            printf("%" PRId8, *((int*)data));
+    }
+}
+
+
+size_t DType_sizeof(DType type) {
+    switch(type) {
+        case (SIZE_T):
+            return sizeof(size_t);
+        case (INT):
+            return sizeof(int);
+        case (UBYTE):
+            return sizeof(int);
+    }
+}
+
 Data int_create(void* int_val) { return (Data){.value = int_val, .vt = &INT_VT}; }
 
 char* int_str(Data int_data) {

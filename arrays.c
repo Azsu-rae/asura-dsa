@@ -5,7 +5,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-void array_structured_input(int** T, int* n) {
+#include "Data.h"
+
+void arrays_structured_input(int** T, int* n) {
     scanf("%d", n);
     *T = malloc(sizeof(int) * (*n));
     for (int i = 0; i < *n; i++) {
@@ -13,10 +15,11 @@ void array_structured_input(int** T, int* n) {
     }
 }
 
-char* array_to_str(char* label, int* T, size_t n) {
+void arrays_print(char* label, void* T, size_t n) {
     printf("\n%s", label);
     for (int i = 0; i < n; i++) {
-        printf("%d ", T[i]);
+        DType_print(DType_index(T, SIZE_T, i), SIZE_T);
+        printf(" ");
     }
 }
 

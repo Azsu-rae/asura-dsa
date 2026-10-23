@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 void array_structured_input(int** T, int* n);
-char* array_to_str(char* label, int* T, size_t n);
+void array_print(char* label, int* T, size_t n);
 
 void** alloc_2d(size_t n, size_t m, size_t bytes);
 void free_2d(void** mat, size_t n);

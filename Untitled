@@ -1,0 +1,4 @@
+
+gcc -g main.c display_calc.c
+gcc -g main.c display_lcd.c
+gcc -g main.c display_led.c
