@@ -15,12 +15,13 @@ void arrays_structured_input(int** T, int* n) {
     }
 }
 
-void arrays_print(char* label, void* T, size_t n) {
+void arrays_desc(char* label, void* T, size_t n, DType type) {
     printf("\n%s", label);
+    printf("[ ");
     for (int i = 0; i < n; i++) {
-        DType_print(DType_index(T, SIZE_T, i), SIZE_T);
+        DType_print(DType_index(T, type, i), type);
         printf(" ");
-    }
+    } printf("]");
 }
 
 void** alloc_2d(size_t n, size_t m, size_t bytes) {

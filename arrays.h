@@ -3,8 +3,10 @@
 
 #include <stddef.h>
 
+#include "Data.h"
+
 void array_structured_input(int** T, int* n);
-void array_print(char* label, int* T, size_t n);
+void arrays_desc(char* label, void* T, size_t n, DType type);
 
 void** alloc_2d(size_t n, size_t m, size_t bytes);
 void free_2d(void** mat, size_t n);

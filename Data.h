@@ -10,11 +10,14 @@ typedef enum {
     SIZE_T,
     UBYTE,
     INT,
+    DOUBLE,
 } DType;
 
-void* DType_index(void* data, DType type, size_t i);
-void DType_print(void* data, DType type);
-size_t DType_sizeof(DType type);
+void* DType_index(void* data, DType dtype, size_t i);
+void DType_print(void* data, DType dtype);
+
+size_t DType_sizeof(DType dtype);
+void DType_desc(DType dtype);
 
 typedef struct Data Data;
 
